@@ -106,7 +106,7 @@ class Category
     /**
      * Get tasks
      *
-     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @return \Doctrine\Common\Collections\ArrayCollection
      */
     public function getTasks()
     {
