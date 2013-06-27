@@ -16,6 +16,7 @@
                     <td>{{ def.propertyName }}</td>
 
                 {% endfor %}
+                <td>Actions</td>
             </tr>  <!-- ### end header -->
 
 
@@ -39,6 +40,12 @@
 
                     </td>
                 {% endfor %}
+                <td>
+                    {# TODO primary key #}
+                    <a href="{{ path(routs.getViewPath, {id: row.id}) }}" >View</a>&nbsp;|&nbsp;
+                    <a href="{{ path(routs.getEditPath, {id: row.id}) }}" >Edit</a>&nbsp;|&nbsp;
+                    <a href="{{ path(routs.getDeletePath, {id: row.id}) }}" >Delete</a>
+                </td>
             </tr>
             {% endfor %} <!-- ### rows -->
 
