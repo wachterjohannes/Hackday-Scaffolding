@@ -3,7 +3,7 @@
 {% block title %}HackdayScaffoldBundle:Scaffold:index{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Scaffold:index page</h1>
+    <h1>Welcome to the Scaffold:index page</h1>
 
     {% if (data is defined) and (definitions is defined) %}
 
@@ -16,19 +16,30 @@
                     <td>{{ def.propertyName }}</td>
 
                 {% endfor %}
-            </tr> <!-- ### end header -->
+            </tr>
+            <!-- ### end header -->
 
 
             {% for row in data %}
-                <tr>
-                    {% for def in definitions %}
-                        <td>{{ attribute(row,def.propertyName) }}</td>
-                    {% endfor %}
-                </tr>
+            <tr>
+                {% for def in definitions %}
+                    <td>
+
+                        {# TODO other types #}
+
+                        {% if def.type == "datetime" %}
+                            {{ attribute(row,def.propertyName).format('d.m.Y H:i:s') }}
+                        {% else %}
+                            {{ attribute(row,def.propertyName) }}
+                        {% endif %}
+
+                    </td>
+                {% endfor %}
+            </tr>
             {% endfor %}<!-- ### rows -->
 
         </table>
 
-    {% endif  %} <!-- ### end main if -->
+    {% endif %} <!-- ### end main if -->
 
 {% endblock %}
