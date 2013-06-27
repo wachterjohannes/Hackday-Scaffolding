@@ -4,4 +4,31 @@
 
 {% block body %}
 <h1>Welcome to the Scaffold:index page</h1>
+
+    {% if (data is defined) and (definitions is defined) %}
+
+
+        <table border="1" cellpadding="10">
+
+            <tr>
+                {% for def in definitions %}
+
+                    <td>{{ def.propertyName }}</td>
+
+                {% endfor %}
+            </tr> <!-- ### end header -->
+
+
+            {% for row in data %}
+                <tr>
+                    {% for def in definitions %}
+                        <td>{{ attribute(row,def.propertyName) }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}<!-- ### rows -->
+
+        </table>
+
+    {% endif  %} <!-- ### end main if -->
+
 {% endblock %}

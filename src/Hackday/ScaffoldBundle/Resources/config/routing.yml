@@ -2,7 +2,12 @@ hackday_scaffold_homepage:
     pattern:  /asdf/{name}
     defaults: { _controller: HackdayScaffoldBundle:Default:index }
 
-scaffold:
+category:
     resource: "@HackdayScaffoldBundle/Controller/CategoryController.php"
     prefix: /category
+    type: annotation
+
+task:
+    resource: "@HackdayScaffoldBundle/Controller/TaskController.php"
+    prefix: /task
     type: annotation
