@@ -49,7 +49,7 @@ class FieldDefinition
     public function getPrimaryKey()
     {
         if ($this->getAssociation()) {
-            return $this->metaData['joinColumns']['referencedColumnName'];
+            return $this->metaData['joinColumns'][0]['referencedColumnName'];
         }
         return "";
     }
