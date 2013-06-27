@@ -136,4 +136,8 @@ class Category
         $this->tasks->removeElement($tasks);
     }
 
+    public function __toString(){
+        return $this->getName();
+    }
+
 }

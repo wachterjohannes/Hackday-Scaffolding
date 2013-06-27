@@ -28,6 +28,12 @@ abstract class ScaffoldController extends Controller
         foreach ($metaData->fieldMappings as $name => $md) {
             $definitions[] = new FieldDefinition($name, $md);
         }
+        foreach ($metaData->associationMappings as $name => $md) {
+            // TODO Many2Many
+            if ($md['type'] != 4) {
+                $definitions[] = new FieldDefinition($name, $md, true);
+            }
+        }
 
         $data = $this->getDoctrine()->getRepository($this->getEntityName())->findAll();
 

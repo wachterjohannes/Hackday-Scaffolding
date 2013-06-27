@@ -17,21 +17,40 @@ class FieldDefinition
 
     var $metaData;
 
-    public function __construct($name, $metaData)
+    var $isAssociation;
+
+    public function __construct($name, $metaData, $isAssociation = false)
     {
         $this->propertyName = $name;
         $this->metaData = $metaData;
+        $this->isAssociation = $isAssociation;
     }
 
-    public function getPropertyName(){
+    public function getPropertyName()
+    {
         return $this->propertyName;
     }
 
-    public function getFieldName(){
+    public function getFieldName()
+    {
         return $this->metaData['fieldName'];
     }
 
-    public function getType(){
+    public function getType()
+    {
         return $this->metaData['type'];
+    }
+
+    public function isAssociation()
+    {
+        return $this->isAssociation;
+    }
+
+    public function getPrimaryKey()
+    {
+        if ($this->isAssociation()) {
+            return $this->metaData['joinColumns']['referencedColumnName'];
+        }
+        return "";
     }
 }
