@@ -41,7 +41,7 @@ class FieldDefinition
         return $this->metaData['type'];
     }
 
-    public function isAssociation()
+    public function getAssociation()
     {
         return $this->isAssociation;
     }
