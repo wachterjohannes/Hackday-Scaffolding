@@ -53,4 +53,13 @@ class FieldDefinition
         }
         return "";
     }
+
+    public function getController()
+    {
+        if ($this->getAssociation()) {
+            $tmp = explode('\\', $this->metaData['targetEntity']);
+            return strtolower($tmp[sizeof($tmp) - 1]);
+        }
+        return "";
+    }
 }

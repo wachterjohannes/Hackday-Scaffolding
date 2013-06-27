@@ -3,7 +3,7 @@
  * Created by JetBrains PhpStorm.
  * User: Administrator
  * Date: 27.06.13
- * Time: 18:15
+ * Time: 20:33
  * To change this template use File | Settings | File Templates.
  */
 
@@ -12,52 +12,71 @@ namespace Hackday\ScaffoldBundle\Util;
 
 class ScaffoldPaths
 {
-    /**
-     * @var string
-     */
-    var $bundleName;
-    /**
-     * @var string
-     */
-    var $controllerName;
-    /**
-     * @var string
-     */
-    var $functionName;
 
-    /**
-     * @param string $bundleName
-     * @param string $controllerName
-     * @param string $functionName
-     */
-    function __construct($bundleName, $controllerName, $functionName)
+    var $route;
+    var $namespace;
+    var $bundle;
+    var $controller;
+    var $action;
+
+    var $actions = array(
+        'index' => 'index',
+        'add' => 'add',
+        'edit' => 'edit',
+        'view' => 'view',
+        'delete' => 'delete',
+    );
+
+    public function __construct($currentRoute)
     {
-        $this->bundleName = $bundleName;
-        $this->controllerName = $controllerName;
-        $this->functionName = $functionName;
+        $this->route = $currentRoute;
+
+        $tmp = explode("_", $currentRoute);
+        $this->namespace = $tmp[0];
+        $this->bundle = $tmp[1];
+        $this->controller = $tmp[2];
+        $this->action = $tmp[3];
     }
 
-    /**
-     * @return string
-     */
-    public function getBundleName()
+    public function getRoute()
     {
-        return $this->bundleName;
+        return $this->route;
     }
 
-    /**
-     * @return string
-     */
-    public function getControllerName()
+    private function getPath($action = "", $controller = "")
     {
-        return $this->controllerName;
+        if ($action == "") {
+            $action = $this->action;
+        } else {
+            $action = $this->actions[$action];
+        }
+        if ($controller == "") $controller = $this->controller;
+        return $this->namespace . '_' . $this->bundle . '_' . $controller . '_' . $action;
     }
 
-    /**
-     * @return string
-     */
-    public function getFunctionName()
+    public function getIndexPath($controller = "")
     {
-        return $this->functionName;
+        return $this->getPath('index', $controller);
     }
+
+    public function getAddPath($controller = "")
+    {
+        return $this->getPath('add', $controller);
+    }
+
+    public function getEditPath($controller = "")
+    {
+        return $this->getPath('edit', $controller);
+    }
+
+    public function getViewPath($controller = "")
+    {
+        return $this->getPath('view', $controller);
+    }
+
+    public function getDeletePath($controller = "")
+    {
+        return $this->getPath('delete', $controller);
+    }
+
 }

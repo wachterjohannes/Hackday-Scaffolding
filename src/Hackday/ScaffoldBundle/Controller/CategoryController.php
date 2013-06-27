@@ -6,6 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+/**
+ * Class CategoryController
+ *
+ * @package Hackday\ScaffoldBundle\Controller
+ * @Route("/category")
+ */
 class CategoryController extends ScaffoldController
 {
     /**

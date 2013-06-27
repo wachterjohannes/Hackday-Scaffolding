@@ -31,7 +31,7 @@
                             {{ attribute(row,def.propertyName).format('d.m.Y H:i:s') }}
 
                         {% elseif def.association == true %}
-                            <a href="{{ asset('css/instal.css') }}" >{{ attribute(row,def.propertyName)}}</a>
+                            <a href="{{ path(routs.getViewPath(def.controller), {id:  attribute(row,def.primaryKey)}) }}" >{{ attribute(row,def.propertyName)}}</a>
 
                         {% else %}
                             {{ attribute(row,def.propertyName) }}

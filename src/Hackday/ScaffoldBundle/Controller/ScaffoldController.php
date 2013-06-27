@@ -3,6 +3,7 @@
 namespace Hackday\ScaffoldBundle\Controller;
 
 use Hackday\ScaffoldBundle\Util\FieldDefinition;
+use Hackday\ScaffoldBundle\Util\ScaffoldPaths;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -18,26 +19,49 @@ abstract class ScaffoldController extends Controller
     protected abstract function getEntityName();
 
     /**
-     * @Route("/index", name="_scaffoldIndex")
+     * @Route("/index")
      * @Template("HackdayScaffoldBundle:Scaffold:index.html.twig")
      */
     public function indexAction()
     {
-        $metaData = $this->getDoctrine()->getManager()->getClassMetadata($this->getEntityName());
-        $definitions = array();
-        foreach ($metaData->fieldMappings as $name => $md) {
-            $definitions[] = new FieldDefinition($name, $md);
-        }
-        foreach ($metaData->associationMappings as $name => $md) {
-            // TODO Many2Many
-            if ($md['type'] != 4) {
-                $definitions[] = new FieldDefinition($name, $md, true);
-            }
-        }
-
+        $definitions = $this->getDefinitions();
+        $routs = $this->getRouts();
         $data = $this->getDoctrine()->getRepository($this->getEntityName())->findAll();
 
-        return array('definitions' => $definitions, 'data' => $data);
+        return array('definitions' => $definitions, 'data' => $data, 'routs' => $routs);
+    }
+
+    /**
+     * @Route("/add")
+     * @Template()
+     */
+    public function addAction()
+    {
+    }
+
+    /**
+     * @Route("/view/{id}")
+     * @Template("HackdayScaffoldBundle:Scaffold:index.html.twig")
+     */
+    public function viewAction($id)
+    {
+
+    }
+
+    /**
+     * @Route("/edit/{id}")
+     * @Template()
+     */
+    public function editAction($id)
+    {
+    }
+
+    /**
+     * @Route("/delete/{id}")
+     * @Template()
+     */
+    public function deleteAction($id)
+    {
     }
 
     protected function debug($var, $die = true)
@@ -50,28 +74,25 @@ abstract class ScaffoldController extends Controller
         }
     }
 
-    /**
-     * @Route("/add", name="_scaffoldAdd")
-     * @Template()
-     */
-    public function addAction()
+    private function getDefinitions()
     {
+        $metaData = $this->getDoctrine()->getManager()->getClassMetadata($this->getEntityName());
+        $definitions = array();
+        foreach ($metaData->fieldMappings as $name => $md) {
+            $definitions[] = new FieldDefinition($name, $md);
+        }
+        foreach ($metaData->associationMappings as $name => $md) {
+            // TODO Many2Many
+            if ($md['type'] != 4) {
+                $definitions[] = new FieldDefinition($name, $md, true);
+            }
+        }
+        return $definitions;
     }
 
-    /**
-     * @Route("/edit", name="_scaffoldEdit")
-     * @Template()
-     */
-    public function editAction()
+    private function getRouts()
     {
-    }
-
-    /**
-     * @Route("/delete", name="_scaffoldDelete")
-     * @Template()
-     */
-    public function deleteAction()
-    {
+        return new ScaffoldPaths($this->getRequest()->attributes->get('_route'));
     }
 
 }
