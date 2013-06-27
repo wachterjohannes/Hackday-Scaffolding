@@ -48,7 +48,7 @@ class FieldDefinition
 
     public function getPrimaryKey()
     {
-        if ($this->isAssociation()) {
+        if ($this->getAssociation()) {
             return $this->metaData['joinColumns']['referencedColumnName'];
         }
         return "";
