@@ -1,0 +1,4 @@
+hackday_scaffold:
+    resource: "@HackdayScaffoldBundle/Resources/config/routing.yml"
+    prefix:   /
+

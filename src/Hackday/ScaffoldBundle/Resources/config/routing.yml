@@ -1,0 +1,3 @@
+hackday_scaffold_homepage:
+    pattern:  /{name}
+    defaults: { _controller: HackdayScaffoldBundle:Default:index }
