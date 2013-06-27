@@ -18,7 +18,7 @@ abstract class ScaffoldController extends Controller
     protected abstract function getEntityName();
 
     /**
-     * @Route("/index")
+     * @Route("/index", name="_scaffoldIndex")
      * @Template("HackdayScaffoldBundle:Scaffold:index.html.twig")
      */
     public function indexAction()
@@ -51,7 +51,7 @@ abstract class ScaffoldController extends Controller
     }
 
     /**
-     * @Route("/add")
+     * @Route("/add", name="_scaffoldAdd")
      * @Template()
      */
     public function addAction()
@@ -59,7 +59,7 @@ abstract class ScaffoldController extends Controller
     }
 
     /**
-     * @Route("/edit")
+     * @Route("/edit", name="_scaffoldEdit")
      * @Template()
      */
     public function editAction()
@@ -67,7 +67,7 @@ abstract class ScaffoldController extends Controller
     }
 
     /**
-     * @Route("/delete")
+     * @Route("/delete", name="_scaffoldDelete")
      * @Template()
      */
     public function deleteAction()
