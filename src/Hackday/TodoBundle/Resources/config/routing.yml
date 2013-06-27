@@ -1,0 +1,3 @@
+hackday_todo:
+    resource: "@HackdayTodoBundle/Controller/"
+    type: annotation

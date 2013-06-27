@@ -1,6 +1,6 @@
 <?php
 
-namespace Hackday\ScaffoldBundle\Entity;
+namespace Hackday\TodoBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 

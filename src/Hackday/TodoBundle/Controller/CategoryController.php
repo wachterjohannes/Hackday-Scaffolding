@@ -1,7 +1,8 @@
 <?php
 
-namespace Hackday\ScaffoldBundle\Controller;
+namespace Hackday\TodoBundle\Controller;
 
+use Hackday\ScaffoldBundle\Controller\ScaffoldController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -9,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 /**
  * Class CategoryController
  *
- * @package Hackday\ScaffoldBundle\Controller
+ * @package Hackday\TodoBundle\Controller
  * @Route("/category")
  */
 class CategoryController extends ScaffoldController
@@ -19,7 +20,7 @@ class CategoryController extends ScaffoldController
      */
     protected function getEntityName()
     {
-        return "HackdayScaffoldBundle:Category";
+        return "HackdayTodoBundle:Category";
     }
 
 }

@@ -1,7 +1,8 @@
 <?php
 
-namespace Hackday\ScaffoldBundle\Controller;
+namespace Hackday\TodoBundle\Controller;
 
+use Hackday\ScaffoldBundle\Controller\ScaffoldController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -18,6 +19,6 @@ class TaskController extends ScaffoldController
      */
     protected function getEntityName()
     {
-        return "HackdayScaffoldBundle:Task";
+        return "HackdayTodoBundle:Task";
     }
 }

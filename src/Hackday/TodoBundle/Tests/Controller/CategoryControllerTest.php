@@ -1,6 +1,6 @@
 <?php
 
-namespace Hackday\ScaffoldBundle\Tests\Controller;
+namespace Hackday\TodoBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

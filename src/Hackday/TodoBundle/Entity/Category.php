@@ -1,6 +1,6 @@
 <?php
 
-namespace Hackday\ScaffoldBundle\Entity;
+namespace Hackday\TodoBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Category
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Hackday\ScaffoldBundle\Entity\CategoryRepository")
+ * @ORM\Entity(repositoryClass="Hackday\TodoBundle\Entity\CategoryRepository")
  */
 class Category
 {

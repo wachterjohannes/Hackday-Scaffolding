@@ -1,0 +1,7 @@
+parameters:
+#    hackday_todo.example.class: Hackday\TodoBundle\Example
+
+services:
+#    hackday_todo.example:
+#        class: %hackday_todo.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
