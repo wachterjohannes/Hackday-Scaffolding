@@ -1,14 +1,14 @@
-# This file is auto-generated during the composer install
 parameters:
     database_driver: pdo_mysql
     database_host: 127.0.0.1
     database_port: null
-    database_name: symfony
-    database_user: root
-    database_password: null
+    database_name: hackday
+    database_user: hackday
+    database_password: 5xW9fW2GruTY4Qzp
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null
     mailer_password: null
     locale: en
-    secret: ThisTokenIsNotSoSecretChangeIt
+    secret: 53be3df2453afc97373aca3d465ec1089
+    database_path: null
