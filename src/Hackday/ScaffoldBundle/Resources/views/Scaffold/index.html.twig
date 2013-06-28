@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Welcome to the Scaffold:index page</h1>
 
-    {% if (data is defined) and (definitions is defined)%}
+    {% if (data is defined) and (definitions is defined) and (routes is defined)%}
 
 
         <table border="1" cellpadding="10">
@@ -32,7 +32,7 @@
                             {{ attribute(row,def.propertyName).format('d.m.Y H:i:s') }}
 
                         {% elseif def.association == true %}
-                            <a href="{{ path(routs.getViewPath(def.controller), {id:  attribute(row,def.primaryKey)}) }}" >{{ attribute(row,def.propertyName)}}</a>
+                            <a href="{{ path(routes.getViewPath(def.controller), {id:  attribute(row,def.primaryKey)}) }}" >{{ attribute(row,def.propertyName)}}</a>
 
                         {% else %}
                             {{ attribute(row,def.propertyName) }}
@@ -42,16 +42,28 @@
                 {% endfor %}
                 <td>
                     {# TODO primary key #}
-                    <a href="{{ path(routs.getViewPath, {id: row.id}) }}" >View</a>&nbsp;|&nbsp;
-                    <a href="{{ path(routs.getEditPath, {id: row.id}) }}" >Edit</a>&nbsp;|&nbsp;
-                    <a href="{{ path(routs.getDeletePath, {id: row.id}) }}" >Delete</a>
+                    <a href="{{ path(routes.getViewPath, {id: row.id}) }}" >View</a>&nbsp;|&nbsp;
+                    <a href="{{ path(routes.getEditPath, {id: row.id}) }}" >Edit</a>&nbsp;|&nbsp;
+                    <a href="{{ path(routes.getDeletePath, {id: row.id}) }}" >Delete</a>
                 </td>
             </tr>
             {% endfor %} <!-- ### rows -->
 
         </table>
-    {% else %}
-       <p>Not all parameters received!</p>
+
+
+    {% else %} <!-- ### end main if -->
+        <h1>Not all parameters received!</h1>
+        {% if (data is not defined) %}
+            <p>Data is not defined!</p>
+        {% endif %}
+        {% if (definitions is not  defined)  %}
+            <p>Definitions is not defined!</p>
+        {% endif %}
+        {% if (routes is not defined) %}
+            <p>Routes is not defined!</p>
+        {% endif %}
+
     {% endif %} <!-- ### end main if -->
 
 {% endblock %}

@@ -25,10 +25,10 @@ abstract class ScaffoldController extends Controller
     public function indexAction()
     {
         $definitions = $this->getDefinitions();
-        $routs = $this->getRouts();
+        $routes = $this->getRoutes();
         $data = $this->getDoctrine()->getRepository($this->getEntityName())->findAll();
 
-        return array('definitions' => $definitions, 'data' => $data, 'routs' => $routs);
+        return array('definitions' => $definitions, 'data' => $data, 'routes' => $routes);
     }
 
     /**
@@ -90,7 +90,7 @@ abstract class ScaffoldController extends Controller
         return $definitions;
     }
 
-    private function getRouts()
+    private function getRoutes()
     {
         return new ScaffoldPaths($this->getRequest()->attributes->get('_route'));
     }
