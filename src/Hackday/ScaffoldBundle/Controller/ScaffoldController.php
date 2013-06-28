@@ -95,7 +95,8 @@ abstract class ScaffoldController extends Controller
             $form->submit($this->getRequest());
 
             if ($form->isValid()) {
-                $data->save();
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
 
                 // Redirect
                 return $this->redirect($this->generateUrl($routes->getIndexPath()));
