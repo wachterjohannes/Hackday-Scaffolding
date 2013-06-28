@@ -88,7 +88,7 @@ abstract class ScaffoldController extends Controller
         $definitions = $this->getDefinitions();
         $routes = $this->getRoutes();
         $data = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
-        $form = $this->createForm(new ScaffoldType($definitions, false), $data);
+        $form = $this->createForm(new ScaffoldType($definitions), $data);
 
         if ($this->getRequest()->isMethod('POST')) {
 

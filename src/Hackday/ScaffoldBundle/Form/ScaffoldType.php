@@ -16,11 +16,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 class ScaffoldType extends AbstractType
 {
     private $definitions = array();
-    private $excludePk = false;
 
-    public function __construct($definitions = array(), $excludePk = false)
+    public function __construct($definitions = array())
     {
-        $this->excludePk = $excludePk;
         $this->definitions = $definitions;
     }
 
@@ -42,12 +40,12 @@ class ScaffoldType extends AbstractType
     {
         /** @var $def \Hackday\ScaffoldBundle\Util\FieldDefinition */
         foreach ($this->definitions as $def) {
-            if (!($def->getIsPrimaryKey() && $this->excludePk)) {
+            if (!$def->getIsPrimaryKey()) {
                 $builder->add($def->getPropertyName());
             }
         }
 
-        // TODO Parameter (Add, Edit)
+        // TODO Text as Parameter (Add, Edit)
         $builder->add('Save', 'submit');
     }
 }
