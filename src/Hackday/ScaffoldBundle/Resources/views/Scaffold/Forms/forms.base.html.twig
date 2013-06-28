@@ -15,13 +15,6 @@
     {% endspaceless %}
 {% endblock datetime_widget %}
 
-{% block date_widget %}
-
-    {% spaceless %}
-        <input type="text" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value.year }}.{{ value.month }}.{{ value.day }}" {% endif %} class="jqueryDatepicker" />
-    {% endspaceless %}
-{% endblock date_widget %}
-
 {% block time_widget %}
     {% spaceless %}
         {% if widget == 'single_text' %}
