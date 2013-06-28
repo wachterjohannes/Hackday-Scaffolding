@@ -48,7 +48,7 @@ abstract class ScaffoldController extends Controller
         $data = $this->getEntityObject();
         $form = $this->createForm(new ScaffoldType($definitions), $data);
 
-        return array('definitions' => $definitions, 'data' => $data, 'form' => $form, 'routes' => $routes);
+        return array('definitions' => $definitions, 'data' => $data, 'form' => $form->createView(), 'routes' => $routes);
 //        if ($this->getRequest()->isMethod('POST')) {
 //
 //            $form->bind($this->getRequest());
