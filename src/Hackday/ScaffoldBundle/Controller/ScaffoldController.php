@@ -33,7 +33,7 @@ abstract class ScaffoldController extends Controller
 
     /**
      * @Route("/add")
-     * @Template()
+     * @Template("HackdayScaffoldBundle:Scaffold:add.html.twig")
      */
     public function addAction()
     {
@@ -41,16 +41,20 @@ abstract class ScaffoldController extends Controller
 
     /**
      * @Route("/view/{id}")
-     * @Template("HackdayScaffoldBundle:Scaffold:index.html.twig")
+     * @Template("HackdayScaffoldBundle:Scaffold:view.html.twig")
      */
     public function viewAction($id)
     {
+        $definitions = $this->getDefinitions();
+        $routes = $this->getRoutes();
+        $data = $this->getDoctrine()->getRepository($this->getEntityName())->findAll();
 
+        return array('definitions' => $definitions, 'data' => $data, 'routes' => $routes);
     }
 
     /**
      * @Route("/edit/{id}")
-     * @Template()
+     * @Template("HackdayScaffoldBundle:Scaffold:edit.html.twig")
      */
     public function editAction($id)
     {
@@ -58,7 +62,7 @@ abstract class ScaffoldController extends Controller
 
     /**
      * @Route("/delete/{id}")
-     * @Template()
+     * @Template("HackdayScaffoldBundle:Scaffold:delete.html.twig")
      */
     public function deleteAction($id)
     {

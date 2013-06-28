@@ -1,4 +1,4 @@
-{% extends "::base.html.twig" %}
+{% extends ".base.html.twig" %}
 
 {% block title %}HackdayScaffoldBundle:Scaffold:index{% endblock %}
 
@@ -52,6 +52,7 @@
         </table>
 
 
+
     {% else %} <!-- ### end main if -->
         <h1>Not all parameters received!</h1>
         {% if (data is not defined) %}
@@ -63,7 +64,6 @@
         {% if (routes is not defined) %}
             <p>Routes is not defined!</p>
         {% endif %}
-
     {% endif %} <!-- ### end main if -->
 
 {% endblock %}
