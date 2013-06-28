@@ -113,6 +113,14 @@ abstract class ScaffoldController extends Controller
      */
     public function deleteAction($id)
     {
+        $routes = $this->getRoutes();
+        $data = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($data);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl($routes->getIndexPath()));
     }
 
     protected function debug($var, $die = true)
