@@ -3,7 +3,7 @@
 {% form_theme form 'HackdayScaffoldBundle:Scaffold:Forms/forms.base.html.twig' %}
 
 {% block content %}
-<h1>Welcome to the Scaffold:add page</h1>
+<h1>Scaffold:add {{ name }}</h1>
 
     <form action="{{ path(routes.getAddPath()) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
 

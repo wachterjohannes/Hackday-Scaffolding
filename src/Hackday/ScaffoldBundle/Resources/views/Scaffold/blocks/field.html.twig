@@ -7,7 +7,7 @@
     {# TODO Many2Many #}
     {% if def.associationType !=4 %}
         {% if attribute(row,def.propertyName) != null %}
-            <a href="{{ path(routes.getViewPath(def.controller), {id:  attribute(row,def.foreignKey)}) }}">{{ attribute(row,def.propertyName) }}</a>
+            <a href="{{ path(routes.getViewPath(def.controller), {id:  attribute(attribute(row,def.propertyName),def.foreignKey)}) }}">{{ attribute(row,def.propertyName) }}</a>
         {% endif %}
     {% endif %}
 {% else %}

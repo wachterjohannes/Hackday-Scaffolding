@@ -2,11 +2,11 @@
 
 {% block content %}
 
-    {# TODO Name #}
-    <h1>View</h1>
+    <h1>View {{ name }}</h1>
     <p>
         <a href="{{ path(routes.getEditPath, {id: data.id}) }}">Edit</a>&nbsp;|&nbsp;
-        <a href="{{ path(routes.getDeletePath, {id: data.id}) }}">Delete</a>
+        <a href="{{ path(routes.getDeletePath, {id: data.id}) }}">Delete</a>&nbsp;|&nbsp;
+        <a href="{{ path(routes.getIndexPath()) }}" >Index</a>
     </p>
     <dl>
         {% for def in definitions %}

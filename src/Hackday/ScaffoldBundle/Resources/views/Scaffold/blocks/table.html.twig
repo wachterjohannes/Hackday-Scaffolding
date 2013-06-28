@@ -10,8 +10,6 @@
     </tr>
     <!-- ### end header -->
 
-
-
     {% for row in data %}
         <tr>
             {% for def in definitions %}
@@ -24,10 +22,9 @@
 
             {% endfor %}
             <td>
-                {# TODO primary key #}
-                <a href="{{ path(routes.getViewPath(controller), {id: row.id}) }}">View</a>&nbsp;|&nbsp;
-                <a href="{{ path(routes.getEditPath(controller), {id: row.id}) }}">Edit</a>&nbsp;|&nbsp;
-                <a href="{{ path(routes.getDeletePath(controller), {id: row.id}) }}">Delete</a>
+                <a href="{{ path(routes.getViewPath(controller), {id:  attribute(row,primaryKey)}) }}">View</a>&nbsp;|&nbsp;
+                <a href="{{ path(routes.getEditPath(controller), {id:  attribute(row,primaryKey)}) }}">Edit</a>&nbsp;|&nbsp;
+                <a href="{{ path(routes.getDeletePath(controller), {id:  attribute(row,primaryKey)}) }}">Delete</a>
             </td>
         </tr>
     {% endfor %} <!-- ### rows -->

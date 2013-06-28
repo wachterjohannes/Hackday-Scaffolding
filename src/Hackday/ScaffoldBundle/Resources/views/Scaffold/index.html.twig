@@ -1,11 +1,11 @@
 {% extends "HackdayScaffoldBundle::scaffold.base.html.twig" %}
 
 {% block content %}
-    <h1>Welcome to the Scaffold:index page</h1>
+    <h1>Scaffold: index of {{ name }} </h1>
 
     {% include'HackdayScaffoldBundle:Scaffold:blocks/table.html.twig' with {'definitions':definitions, 'data':data,'controller':''}  %}
 
 
-    <p></p><a href="{{ path(routes.getAddPath()) }}" >Add</a></p>
+    <p></p><a href="{{ path(routes.getAddPath()) }}" >Add {{ name }}</a></p>
 
 {% endblock %}
