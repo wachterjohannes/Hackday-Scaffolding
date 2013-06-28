@@ -3,47 +3,53 @@
 {% block content %}
     <h1>Welcome to the Scaffold:index page</h1>
 
-        <table border="1" cellpadding="10">
+    <table border="1" cellpadding="10">
 
-            <tr>
-                {% for def in definitions %}
-
+        <tr>
+            {% for def in definitions %}
+                {% if def.association != true or def.associationType != 4 %}
                     <td>{{ def.propertyName }}</td>
+                {% endif %}
+            {% endfor %}
+            <td>Actions</td>
+        </tr>
+        <!-- ### end header -->
 
-                {% endfor %}
-                <td>Actions</td>
-            </tr>  <!-- ### end header -->
 
 
-
-            {% for row in data %}
+        {% for row in data %}
             <tr>
                 {% for def in definitions %}
-                    <td>
 
-                        {# TODO other types #}
+                    {# TODO other types #}
 
-                        {% if def.type == "datetime" %}
+                    {% if def.type == "datetime" %}
+                        <td>
                             {{ attribute(row,def.propertyName).format('d.m.Y H:i:s') }}
-
-                        {% elseif def.association == true %}
-                            <a href="{{ path(routes.getViewPath(def.controller), {id:  attribute(row,def.primaryKey)}) }}" >{{ attribute(row,def.propertyName)}}</a>
-
-                        {% else %}
-                            {{ attribute(row,def.propertyName) }}
+                        </td>
+                    {% elseif def.association %}
+                        {# TODO Many2Many #}
+                        {% if def.associationType !=4 %}
+                            <td>
+                                <a href="{{ path(routes.getViewPath(def.controller), {id:  attribute(data,def.primaryKey)}) }}">{{ attribute(data,def.propertyName) }}</a>
+                            </td>
                         {% endif %}
+                    {% else %}
+                        <td>
+                            {{ attribute(row,def.propertyName) }}
+                        </td>
+                    {% endif %}
 
-                    </td>
                 {% endfor %}
                 <td>
                     {# TODO primary key #}
-                    <a href="{{ path(routes.getViewPath, {id: row.id}) }}" >View</a>&nbsp;|&nbsp;
-                    <a href="{{ path(routes.getEditPath, {id: row.id}) }}" >Edit</a>&nbsp;|&nbsp;
-                    <a href="{{ path(routes.getDeletePath, {id: row.id}) }}" >Delete</a>
+                    <a href="{{ path(routes.getViewPath, {id: row.id}) }}">View</a>&nbsp;|&nbsp;
+                    <a href="{{ path(routes.getEditPath, {id: row.id}) }}">Edit</a>&nbsp;|&nbsp;
+                    <a href="{{ path(routes.getDeletePath, {id: row.id}) }}">Delete</a>
                 </td>
             </tr>
-            {% endfor %} <!-- ### rows -->
+        {% endfor %} <!-- ### rows -->
 
-        </table>
+    </table>
 
 {% endblock %}

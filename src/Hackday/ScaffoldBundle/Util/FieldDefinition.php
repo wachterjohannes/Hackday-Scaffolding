@@ -49,7 +49,11 @@ class FieldDefinition
     public function getPrimaryKey()
     {
         if ($this->getAssociation()) {
-            return $this->metaData['joinColumns'][0]['referencedColumnName'];
+            // TODO Many2Many
+            // Excluded Many2One
+            if($this->metaData['type'] != '4'){
+                return $this->metaData['joinColumns'][0]['referencedColumnName'];
+            }
         }
         return "";
     }
