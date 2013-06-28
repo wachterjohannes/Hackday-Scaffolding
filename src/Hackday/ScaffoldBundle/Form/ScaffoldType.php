@@ -43,16 +43,21 @@ class ScaffoldType extends AbstractType
         /** @var $def \Hackday\ScaffoldBundle\Util\FieldDefinition */
         foreach ($this->definitions as $def) {
             if (!$def->getIsPrimaryKey()) {
+            // TODO Other Types
                 if ($def->getType() == "datetime") {
                     $builder->add($def->getPropertyName(), 'datetime', array(
+                        'widget' => 'single_text',
                         'format' => 'dd-MM-yyyy H:m'
                     ));
                 } else if ($def->getType() == "date") {
                     $builder->add($def->getPropertyName(), 'date', array(
-                        'format' => 'dd-MM-yyyy H:m'
+                        'widget' => 'single_text',
+                        'format' => 'dd-MM-yyyy',
+                        'attr' => array('class' => 'jqueryDatepicker')
                     ));
                 } else if ($def->getType() == "time") {
                     $builder->add($def->getPropertyName(), 'time', array(
+                        'widget' => 'single_text',
                         'format' => 'H:m'
                     ));
                 } else {
