@@ -10,21 +10,7 @@
             {% if def.association != true or def.associationType != 4 %}
                 <dt>{{ def.propertyName }}</dt>
                 <dd>
-                    {# TODO Other Types #}
-                    {% if def.type == "datetime" %}
-                        {{ attribute(data,def.propertyName).format('d.m.Y H:i:s') }}
-                    {% elseif def.association %}
-                        {# TODO Many2Many #}
-                        {# one to many#}
-                        {% if def.associationType !=4 %}
-                            {% if attribute(data,def.propertyName) != null %}
-                                <a href="{{ path(routes.getViewPath(def.controller), {id:  attribute(data,def.foreignKey)}) }}">{{ attribute(data,def.propertyName) }}</a>
-                            {% endif %}
-                        {% endif %}
-
-                    {% else %}
-                        {{ attribute(data,def.propertyName) }}
-                    {% endif %}
+                    {% include'HackdayScaffoldBundle:Scaffold:blocks/field.html.twig' with {'row':data} %}
                 </dd>
             {% endif %}
         {% endfor %}
