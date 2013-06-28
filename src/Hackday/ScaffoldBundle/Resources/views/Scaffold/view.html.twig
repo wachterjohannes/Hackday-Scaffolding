@@ -26,14 +26,19 @@
                         {{ attribute(data,def.propertyName).format('d.m.Y H:i:s') }}
                     </td>
 
-                    {# one to many#}
+
                 {% elseif def.association %}
                     {# TODO Many2Many #}
+
+                    {# one to many#}
                     {% if def.associationType !=4 %}
                         <td>
-                            <a href="{{ path(routes.getViewPath(def.controller), {id:  attribute(data,def.foreignKey)}) }}">{{ attribute(data,def.propertyName) }}</a>
+                            {% if attribute(data,def.propertyName) != null %}
+                                <a href="{{ path(routes.getViewPath(def.controller), {id:  attribute(data,def.foreignKey)}) }}">{{ attribute(data,def.propertyName) }}</a>
+                            {% endif %}
                         </td>
                     {% endif %}
+
                 {% else %}
                     <td>
                         {{ attribute(data,def.propertyName) }}
