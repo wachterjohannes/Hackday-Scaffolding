@@ -86,10 +86,7 @@ abstract class ScaffoldController extends Controller
             $definitions[] = new FieldDefinition($name, $md);
         }
         foreach ($metaData->associationMappings as $name => $md) {
-            // TODO Many2Many
-            if ($md['type'] != 4) {
-                $definitions[] = new FieldDefinition($name, $md, true);
-            }
+            $definitions[] = new FieldDefinition($name, $md, true);
         }
         return $definitions;
     }

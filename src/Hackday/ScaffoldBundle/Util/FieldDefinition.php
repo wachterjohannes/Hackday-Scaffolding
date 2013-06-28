@@ -62,4 +62,12 @@ class FieldDefinition
         }
         return "";
     }
+
+    public function getAssociationType()
+    {
+        if ($this->getAssociation()) {
+            return $this->metaData['type'];
+        }
+        return "";
+    }
 }
