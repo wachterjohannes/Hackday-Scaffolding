@@ -1,7 +1,15 @@
-{% extends "::base.html.twig" %}
+{% extends "HackdayScaffoldBundle::scaffold.base.html.twig" %}
 
-{% block title %}HackdayScaffoldBundle:Scaffold:add{% endblock %}
-
-{% block body %}
+{% block content %}
 <h1>Welcome to the Scaffold:add page</h1>
+
+    <form action="{{ path(routes.getIndexPath()) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+
+        {{ form_widget(form) }}
+
+    </form>
+
 {% endblock %}
+
+
+
