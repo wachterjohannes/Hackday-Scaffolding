@@ -3,9 +3,11 @@
 {% block content %}
 <h1>Welcome to the Scaffold:add page</h1>
 
-    <form action="{{ path(routes.getIndexPath()) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+    <form action="{{ path(routes.getAddPath()) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
 
         {{ form_widget(form) }}
+
+
 
     </form>
 
