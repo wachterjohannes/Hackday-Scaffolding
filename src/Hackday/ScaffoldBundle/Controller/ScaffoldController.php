@@ -50,7 +50,7 @@ abstract class ScaffoldController extends Controller
 
         if ($this->getRequest()->isMethod('POST')) {
 
-            $form->bind($this->getRequest());
+            $form->submit($this->getRequest());
 
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
@@ -92,11 +92,10 @@ abstract class ScaffoldController extends Controller
 
         if ($this->getRequest()->isMethod('POST')) {
 
-            $form->bind($this->getRequest());
+            $form->submit($this->getRequest());
 
             if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $em->flush();
+                $data->save();
 
                 // Redirect
                 return $this->redirect($this->generateUrl($routes->getIndexPath()));
