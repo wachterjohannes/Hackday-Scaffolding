@@ -1,6 +1,8 @@
 {# TODO other types #}
 {% if def.type == "datetime" %}
     {{ attribute(row,def.propertyName).format('d.m.Y H:i:s') }}
+{% elseif def.type == "date" %}
+    {{ attribute(row,def.propertyName).format('d.m.Y') }}
 {% elseif def.association %}
     {# TODO Many2Many #}
     {% if def.associationType !=4 %}
