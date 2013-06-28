@@ -20,7 +20,7 @@ class ScaffoldType extends AbstractType
 
     public function __construct($definitions = array(), $submit = "Save")
     {
-        $this->definitions = $definitions;
+        $this->definitions = $definitions['definitions'];
         $this->submitText = $submit;
     }
 

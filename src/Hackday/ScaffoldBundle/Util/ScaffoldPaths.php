@@ -79,4 +79,8 @@ class ScaffoldPaths
         return $this->getPath('delete', $controller);
     }
 
+    public function getController()
+    {
+        return $this->controller;
+    }
 }

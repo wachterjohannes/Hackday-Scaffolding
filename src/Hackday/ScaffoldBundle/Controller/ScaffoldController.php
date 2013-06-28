@@ -34,7 +34,7 @@ abstract class ScaffoldController extends Controller
         $routes = $this->getRoutes();
         $data = $this->getDoctrine()->getRepository($this->getEntityName())->findAll();
 
-        return array('definitions' => $definitions, 'data' => $data, 'routes' => $routes);
+        return array('definitions' => $definitions['definitions'], 'primaryKey' => $definitions['pk'], 'name' => $routes->getController(), 'data' => $data, 'routes' => $routes);
     }
 
     /**
@@ -63,7 +63,7 @@ abstract class ScaffoldController extends Controller
 
         }
 
-        return array('definitions' => $definitions, 'data' => $data, 'form' => $form->createView(), 'routes' => $routes);
+        return array('definitions' => $definitions['definitions'], 'primaryKey' => $definitions['pk'], 'name' => $routes->getController(), 'data' => $data, 'form' => $form->createView(), 'routes' => $routes);
     }
 
     /**
@@ -76,7 +76,7 @@ abstract class ScaffoldController extends Controller
         $routes = $this->getRoutes();
         $data = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
 
-        return array('definitions' => $definitions, 'data' => $data, 'routes' => $routes);
+        return array('definitions' => $definitions['definitions'], 'primaryKey' => $definitions['pk'], 'name' => $routes->getController(), 'data' => $data, 'routes' => $routes);
     }
 
     /**
@@ -104,7 +104,7 @@ abstract class ScaffoldController extends Controller
 
         }
 
-        return array('definitions' => $definitions, 'data' => $data, 'form' => $form->createView(), 'routes' => $routes);
+        return array('definitions' => $definitions['definitions'], 'primaryKey' => $definitions['pk'], 'name' => $routes->getController(), 'data' => $data, 'form' => $form->createView(), 'routes' => $routes);
     }
 
     /**
@@ -139,18 +139,26 @@ abstract class ScaffoldController extends Controller
             $entityName = $this->getEntityName();
         }
         $metaData = $this->getDoctrine()->getManager()->getClassMetadata($entityName);
+
+        $pk = '';
         $definitions = array();
         foreach ($metaData->fieldMappings as $name => $md) {
-            $definitions[] = new FieldDefinition($name, $md);
+            $def = new FieldDefinition($name, $md);
+            if ($def->getIsPrimaryKey()) $pk = $def->propertyName;
+            $definitions[] = $def;
         }
         foreach ($metaData->associationMappings as $name => $md) {
             $def = new FieldDefinition($name, $md, true);
             if ($primary) {
-                $def->setAssociationDefinition($this->getDefinitions($def->getClassName(), false));
+                $def->setAssociationDefinition($this->getDefinitions($def->getClassName(), false)['definitions']);
             }
             $definitions[] = $def;
         }
-        return $definitions;
+        $result = array(
+            'pk' => $pk,
+            'definitions' => $definitions
+        );
+        return $result;
     }
 
     private function getRoutes()
