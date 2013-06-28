@@ -1,7 +1,6 @@
 {% extends 'form_div_layout.html.twig' %}
 
 {% block datetime_widget %}
-    <p>my date time widget 2</p>
     {% spaceless %}
         {% if widget == 'single_text' %}
             {{ block('form_widget_simple') }}
@@ -17,18 +16,9 @@
 {% endblock datetime_widget %}
 
 {% block date_widget %}
+
     {% spaceless %}
-        {% if widget == 'single_text' %}
-            {{ block('form_widget_simple') }}
-        {% else %}
-            <div {{ block('widget_container_attributes') }}>
-                {{ date_pattern|replace({
-                '{{ year }}':  form_widget(form.year),
-                '{{ month }}': form_widget(form.month),
-                '{{ day }}':   form_widget(form.day),
-                })|raw }}
-            </div>
-        {% endif %}
+        <input type="text" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value.year }}.{{ value.month }}.{{ value.day }}" {% endif %} class="jqueryDatepicker" />
     {% endspaceless %}
 {% endblock date_widget %}
 

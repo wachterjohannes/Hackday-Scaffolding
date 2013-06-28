@@ -2,6 +2,24 @@
 
 {% block title %}HackdayScaffoldBundle:Scaffold{% endblock %}
 
+
+{% block stylesheets %}
+
+    {{ parent() }}
+    <link rel="stylesheet"  href="{{ asset('bundles/hackdayscaffold/css/jquery-ui.css') }}" >
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js" type="text/javascript"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="{{ asset('bundles/hackdayscaffold/js/init.js')}}" type="text/javascript" >
+
+{% endblock %}
+
+
 {% block body %}
     <h1>HackdayScaffoldBundle:Scaffold:base</h1>
 
@@ -19,5 +37,6 @@
     {% endif %} <!-- ### end main if -->
 
 {% endblock %}
+
 
 
