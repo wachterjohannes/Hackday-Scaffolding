@@ -1,7 +1,16 @@
-{% extends "::base.html.twig" %}
+{% extends "HackdayScaffoldBundle::scaffold.base.html.twig" %}
 
-{% block title %}HackdayScaffoldBundle:Scaffold:edit{% endblock %}
+{% block content %}
+    <h1>Welcome to the Scaffold:edit page</h1>
 
-{% block body %}
-<h1>Welcome to the Scaffold:edit page</h1>
+    <form action="{{ path(routes.getEditPath(), {id:  data.id})  }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+
+        {{ form_widget(form) }}
+
+
+        <a href="{{ path(routes.getIndexPath()) }}" >Abort</a>
+    </form>
+
 {% endblock %}
+
+
