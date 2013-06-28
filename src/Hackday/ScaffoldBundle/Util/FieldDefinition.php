@@ -46,15 +46,15 @@ class FieldDefinition
         return $this->isAssociation;
     }
 
-    public function getPrimaryKey()
+    public function getForeignKey()
     {
         if ($this->getAssociation()) {
             // TODO Many2Many
             // Excluded Many2One
-            if($this->metaData['type'] != '4'){
+            if ($this->metaData['type'] != '4') {
                 return $this->metaData['joinColumns'][0]['referencedColumnName'];
             }
-        }
+    }
         return "";
     }
 
@@ -73,5 +73,13 @@ class FieldDefinition
             return $this->metaData['type'];
         }
         return "";
+    }
+
+    public function getIsPrimaryKey()
+    {
+        if (isset($this->metaData['id']) && $this->metaData['id'] == '1') {
+            return true;
+        }
+        return false;
     }
 }
