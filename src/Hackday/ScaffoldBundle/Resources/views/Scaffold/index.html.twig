@@ -31,7 +31,9 @@
                         {# TODO Many2Many #}
                         {% if def.associationType !=4 %}
                             <td>
-                                <a href="{{ path(routes.getViewPath(def.controller), {id:  attribute(row,def.foreignKey)}) }}">{{ attribute(row,def.propertyName) }}</a>
+                                {% if attribute(data,def.propertyName) != null %}
+                                    <a href="{{ path(routes.getViewPath(def.controller), {id:  attribute(row,def.foreignKey)}) }}">{{ attribute(row,def.propertyName) }}</a>
+                                {% endif %}
                             </td>
                         {% endif %}
                     {% else %}
