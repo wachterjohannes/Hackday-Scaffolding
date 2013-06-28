@@ -47,7 +47,7 @@ abstract class ScaffoldController extends Controller
     {
         $definitions = $this->getDefinitions();
         $routes = $this->getRoutes();
-        $data = $this->getDoctrine()->getRepository($this->getEntityName())->findAll();
+        $data = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
 
         return array('definitions' => $definitions, 'data' => $data, 'routes' => $routes);
     }

@@ -1,7 +1,44 @@
-{% extends "::base.html.twig" %}
+{% extends "HackdayScaffoldBundle::scaffold.base.html.twig" %}
 
-{% block title %}HackdayScaffoldBundle:Scaffold:view{% endblock %}
+{% block content %}
 
-{% block body %}
 <h1>Welcome to the Scaffold:view page</h1>
+
+    <table border="1" cellpadding="10">
+
+        <tr>
+            {% for def in definitions %}
+
+                <td>{{ def.propertyName }}</td>
+
+            {% endfor %}
+            <td>Actions</td>
+        </tr>  <!-- ### end header -->
+
+
+            <tr>
+                {% for def in definitions %}
+                    <td>
+
+                        {% if def.type == "datetime" %}
+                            {{ attribute(data,def.propertyName).format('d.m.Y H:i:s') }}
+
+                        {% elseif def.association == true %}
+                            <a href="{{ path(routes.getViewPath(def.controller), {id:  attribute(data,def.primaryKey)}) }}" >{{ attribute(data,def.propertyName)}}</a>
+
+                        {% else %}
+                            {{ attribute(data,def.propertyName) }}
+
+                        {% endif %}
+
+                    </td>
+                {% endfor %}
+                <td>
+                    {# TODO primary key #}
+                    <a href="{{ path(routes.getEditPath, {id: data.id}) }}" >Edit</a>&nbsp;|&nbsp;
+                    <a href="{{ path(routes.getDeletePath, {id: data.id}) }}" >Delete</a>
+                </td>
+            </tr>
+
+    </table>
 {% endblock %}

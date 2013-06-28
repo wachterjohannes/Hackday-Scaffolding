@@ -1,0 +1,26 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}HackdayScaffoldBundle:Scaffold{% endblock %}
+
+{% block body %}
+    <h1>HackdayScaffoldBundle:Scaffold:base</h1>
+
+    {% if (data is defined) and (definitions is defined) and (routes is defined)%}
+        {% block content %}{% endblock %}  <!-- ### main content  -->
+
+    {% else %} <!-- ### end main if -->
+        <h1>Not all parameters received!</h1>
+        {% if (data is not defined) %}
+            <p>Data is not defined!</p>
+        {% endif %}
+        {% if (definitions is not  defined)  %}
+            <p>Definitions is not defined!</p>
+        {% endif %}
+        {% if (routes is not defined) %}
+            <p>Routes is not defined!</p>
+        {% endif %}
+    {% endif %} <!-- ### end main if -->
+
+{% endblock %}
+
+

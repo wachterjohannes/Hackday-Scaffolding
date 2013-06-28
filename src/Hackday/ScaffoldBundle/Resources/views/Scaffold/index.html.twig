@@ -1,12 +1,7 @@
-{% extends ".base.html.twig" %}
+{% extends "HackdayScaffoldBundle::scaffold.base.html.twig" %}
 
-{% block title %}HackdayScaffoldBundle:Scaffold:index{% endblock %}
-
-{% block body %}
+{% block content %}
     <h1>Welcome to the Scaffold:index page</h1>
-
-    {% if (data is defined) and (definitions is defined) and (routes is defined)%}
-
 
         <table border="1" cellpadding="10">
 
@@ -50,20 +45,5 @@
             {% endfor %} <!-- ### rows -->
 
         </table>
-
-
-
-    {% else %} <!-- ### end main if -->
-        <h1>Not all parameters received!</h1>
-        {% if (data is not defined) %}
-            <p>Data is not defined!</p>
-        {% endif %}
-        {% if (definitions is not  defined)  %}
-            <p>Definitions is not defined!</p>
-        {% endif %}
-        {% if (routes is not defined) %}
-            <p>Routes is not defined!</p>
-        {% endif %}
-    {% endif %} <!-- ### end main if -->
 
 {% endblock %}
