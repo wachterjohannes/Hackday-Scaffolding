@@ -46,7 +46,7 @@ abstract class ScaffoldController extends Controller
         $definitions = $this->getDefinitions();
         $routes = $this->getRoutes();
         $data = $this->getEntityObject();
-        $form = $this->createForm(new ScaffoldType($definitions, true), $data);
+        $form = $this->createForm(new ScaffoldType($definitions, 'Add'), $data);
 
         if ($this->getRequest()->isMethod('POST')) {
 
@@ -88,7 +88,7 @@ abstract class ScaffoldController extends Controller
         $definitions = $this->getDefinitions();
         $routes = $this->getRoutes();
         $data = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
-        $form = $this->createForm(new ScaffoldType($definitions), $data);
+        $form = $this->createForm(new ScaffoldType($definitions, 'Save'), $data);
 
         if ($this->getRequest()->isMethod('POST')) {
 
@@ -133,15 +133,22 @@ abstract class ScaffoldController extends Controller
         }
     }
 
-    private function getDefinitions()
+    private function getDefinitions($entityName = "", $primary = true)
     {
-        $metaData = $this->getDoctrine()->getManager()->getClassMetadata($this->getEntityName());
+        if ($entityName == "") {
+            $entityName = $this->getEntityName();
+        }
+        $metaData = $this->getDoctrine()->getManager()->getClassMetadata($entityName);
         $definitions = array();
         foreach ($metaData->fieldMappings as $name => $md) {
             $definitions[] = new FieldDefinition($name, $md);
         }
         foreach ($metaData->associationMappings as $name => $md) {
-            $definitions[] = new FieldDefinition($name, $md, true);
+            $def = new FieldDefinition($name, $md, true);
+            if ($primary) {
+                $def->setAssociationDefinition($this->getDefinitions($def->getClassName(), false));
+            }
+            $definitions[] = $def;
         }
         return $definitions;
     }

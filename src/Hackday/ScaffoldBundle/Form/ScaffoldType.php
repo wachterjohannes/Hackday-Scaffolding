@@ -16,10 +16,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 class ScaffoldType extends AbstractType
 {
     private $definitions = array();
+    private $submitText;
 
-    public function __construct($definitions = array())
+    public function __construct($definitions = array(), $submit = "Save")
     {
         $this->definitions = $definitions;
+        $this->submitText = $submit;
     }
 
     /**
@@ -45,7 +47,6 @@ class ScaffoldType extends AbstractType
             }
         }
 
-        // TODO Text as Parameter (Add, Edit)
-        $builder->add('Save', 'submit');
+        $builder->add($this->submitText, 'submit');
     }
 }

@@ -19,11 +19,14 @@ class FieldDefinition
 
     var $isAssociation;
 
-    public function __construct($name, $metaData, $isAssociation = false)
+    var $associationDefinition;
+
+    public function __construct($name, $metaData, $isAssociation = false, $associationDefinition = array())
     {
         $this->propertyName = $name;
         $this->metaData = $metaData;
         $this->isAssociation = $isAssociation;
+        $this->associationDefinition = $associationDefinition;
     }
 
     public function getPropertyName()
@@ -54,7 +57,7 @@ class FieldDefinition
             if ($this->metaData['type'] != '4') {
                 return $this->metaData['joinColumns'][0]['referencedColumnName'];
             }
-    }
+        }
         return "";
     }
 
@@ -81,5 +84,23 @@ class FieldDefinition
             return true;
         }
         return false;
+    }
+
+    public function getClassName()
+    {
+        if ($this->getAssociation()) {
+            return $this->metaData['targetEntity'];
+        }
+        return "";
+    }
+
+    public function getAssociationDefinition()
+    {
+        return $this->associationDefinition;
+    }
+
+    public function setAssociationDefinition($associationDefinition)
+    {
+        $this->associationDefinition = $associationDefinition;
     }
 }

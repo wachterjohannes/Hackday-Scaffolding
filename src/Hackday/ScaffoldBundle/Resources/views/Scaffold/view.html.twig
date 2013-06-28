@@ -2,58 +2,41 @@
 
 {% block content %}
 
-    <h1>Welcome to the Scaffold:view page</h1>
+    {# TODO Name #}
+    <h1>View</h1>
 
-    <table border="1" cellpadding="10">
-
-        <tr>
-            {% for def in definitions %}
-
-                {% if def.association != true or def.associationType != 4 %}
-                    <td>{{ def.propertyName }}</td>
-                {% endif %}
-            {% endfor %}
-            <td>Actions</td>
-        </tr>
-        <!-- ### end header -->
-
-
-        <tr>
-            {% for def in definitions %}
-
-                {% if def.type == "datetime" %}
-                    <td>
+    <dl>
+        {% for def in definitions %}
+            {% if def.association != true or def.associationType != 4 %}
+                <dt>{{ def.propertyName }}</dt>
+                <dd>
+                    {# TODO Other Types #}
+                    {% if def.type == "datetime" %}
                         {{ attribute(data,def.propertyName).format('d.m.Y H:i:s') }}
-                    </td>
-
-
-                {% elseif def.association %}
-                    {# TODO Many2Many #}
-
-                    {# one to many#}
-                    {% if def.associationType !=4 %}
-                        <td>
+                    {% elseif def.association %}
+                        {# TODO Many2Many #}
+                        {# one to many#}
+                        {% if def.associationType !=4 %}
                             {% if attribute(data,def.propertyName) != null %}
                                 <a href="{{ path(routes.getViewPath(def.controller), {id:  attribute(data,def.foreignKey)}) }}">{{ attribute(data,def.propertyName) }}</a>
                             {% endif %}
-                        </td>
-                    {% endif %}
+                        {% endif %}
 
-                {% else %}
-                    <td>
+                    {% else %}
                         {{ attribute(data,def.propertyName) }}
-                    </td>
-                {% endif %}
+                    {% endif %}
+                </dd>
+            {% endif %}
+        {% endfor %}
+    </dl>
 
-            {% endfor %}
-            <td>
-                {# TODO primary key #}
-                <a href="{{ path(routes.getEditPath, {id: data.id}) }}">Edit</a>&nbsp;|&nbsp;
-                <a href="{{ path(routes.getDeletePath, {id: data.id}) }}">Delete</a>
-            </td>
-        </tr>
-
-    </table>
-
-    {# TODO Other Associations (One2Many and Many2Many) #}
+    {# TODO Test Many2Many #}
+    {% for def in definitions %}
+        {% if def.association %}
+            {% if def.associationType == 4 %}
+                <h2>Associated {{ def.propertyName }}</h2>
+                {% include'HackdayScaffoldBundle:Scaffold:blocks/table.html.twig' with {'definitions':def.associationDefinition, 'data':attribute(data,def.propertyName), 'controller':def.controller} %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
 {% endblock %}

@@ -3,55 +3,6 @@
 {% block content %}
     <h1>Welcome to the Scaffold:index page</h1>
 
-    <table border="1" cellpadding="10">
-
-        <tr>
-            {% for def in definitions %}
-                {% if def.association != true or def.associationType != 4 %}
-                    <td>{{ def.propertyName }}</td>
-                {% endif %}
-            {% endfor %}
-            <td>Actions</td>
-        </tr>
-        <!-- ### end header -->
-
-
-
-        {% for row in data %}
-            <tr>
-                {% for def in definitions %}
-
-                    {# TODO other types #}
-
-                    {% if def.type == "datetime" %}
-                        <td>
-                            {{ attribute(row,def.propertyName).format('d.m.Y H:i:s') }}
-                        </td>
-                    {% elseif def.association %}
-                        {# TODO Many2Many #}
-                        {% if def.associationType !=4 %}
-                            <td>
-                                {% if attribute(row,def.propertyName) != null %}
-                                    <a href="{{ path(routes.getViewPath(def.controller), {id:  attribute(row,def.foreignKey)}) }}">{{ attribute(row,def.propertyName) }}</a>
-                                {% endif %}
-                            </td>
-                        {% endif %}
-                    {% else %}
-                        <td>
-                            {{ attribute(row,def.propertyName) }}
-                        </td>
-                    {% endif %}
-
-                {% endfor %}
-                <td>
-                    {# TODO primary key #}
-                    <a href="{{ path(routes.getViewPath, {id: row.id}) }}">View</a>&nbsp;|&nbsp;
-                    <a href="{{ path(routes.getEditPath, {id: row.id}) }}">Edit</a>&nbsp;|&nbsp;
-                    <a href="{{ path(routes.getDeletePath, {id: row.id}) }}">Delete</a>
-                </td>
-            </tr>
-        {% endfor %} <!-- ### rows -->
-
-    </table>
+    {% include'HackdayScaffoldBundle:Scaffold:blocks/table.html.twig' with {'definitions':definitions, 'data':data,'controller':''} %}
 
 {% endblock %}

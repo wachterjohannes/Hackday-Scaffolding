@@ -152,4 +152,9 @@ class Task
     {
         return $this->category;
     }
+
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
 }
