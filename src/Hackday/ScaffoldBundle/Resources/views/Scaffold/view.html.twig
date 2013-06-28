@@ -4,7 +4,10 @@
 
     {# TODO Name #}
     <h1>View</h1>
-
+    <p>
+        <a href="{{ path(routes.getEditPath, {id: data.id}) }}">Edit</a>&nbsp;|&nbsp;
+        <a href="{{ path(routes.getDeletePath, {id: data.id}) }}">Delete</a>
+    </p>
     <dl>
         {% for def in definitions %}
             {% if def.association != true or def.associationType != 4 %}

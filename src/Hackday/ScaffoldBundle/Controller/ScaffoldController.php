@@ -99,7 +99,7 @@ abstract class ScaffoldController extends Controller
                 $em->flush();
 
                 // Redirect
-                return $this->redirect($this->generateUrl($routes->getIndexPath()));
+                return $this->redirect($this->generateUrl($routes->getViewPath(), array('id' => $id)));
             }
 
         }
