@@ -16,9 +16,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 class ScaffoldType extends AbstractType
 {
     private $definitions = array();
+    private $excludePk = false;
 
-    public function __construct($definitions = array())
+    public function __construct($definitions = array(), $excludePk = false)
     {
+        $this->excludePk = $excludePk;
         $this->definitions = $definitions;
     }
 
@@ -40,7 +42,9 @@ class ScaffoldType extends AbstractType
     {
         /** @var $def \Hackday\ScaffoldBundle\Util\FieldDefinition */
         foreach ($this->definitions as $def) {
-            $builder->add($def->getPropertyName());
+            if (!($def->getIsPrimaryKey() && $this->excludePk)) {
+                $builder->add($def->getPropertyName());
+            }
         }
     }
 }
