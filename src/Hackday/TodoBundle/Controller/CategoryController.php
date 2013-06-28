@@ -3,6 +3,7 @@
 namespace Hackday\TodoBundle\Controller;
 
 use Hackday\ScaffoldBundle\Controller\ScaffoldController;
+use Hackday\TodoBundle\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -22,5 +23,15 @@ class CategoryController extends ScaffoldController
     {
         return "HackdayTodoBundle:Category";
     }
+
+    /**
+     * @return mixed
+     */
+    protected function getEntityObject()
+    {
+        $cat = new Category();
+        return $cat;
+    }
+
 
 }

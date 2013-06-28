@@ -2,6 +2,7 @@
 
 namespace Hackday\ScaffoldBundle\Controller;
 
+use Hackday\ScaffoldBundle\Form\ScaffoldType;
 use Hackday\ScaffoldBundle\Util\FieldDefinition;
 use Hackday\ScaffoldBundle\Util\ScaffoldPaths;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -17,6 +18,11 @@ abstract class ScaffoldController extends Controller
      * @return string
      */
     protected abstract function getEntityName();
+
+    /**
+     * @return mixed
+     */
+    protected abstract function getEntityObject();
 
     /**
      * @Route("/index")
@@ -37,6 +43,25 @@ abstract class ScaffoldController extends Controller
      */
     public function addAction()
     {
+        $definitions = $this->getDefinitions();
+        $routes = $this->getRoutes();
+        $data = $this->getEntityObject();
+        $form = $this->createForm(new ScaffoldType(), $data);
+
+        return array('definitions' => $definitions, 'form' => $form, 'routes' => $routes);
+//        if ($this->getRequest()->isMethod('POST')) {
+//
+//            $form->bind($this->getRequest());
+//
+//            if ($form->isValid()) {
+//
+//                $em = $this->getDoctrine()->getManager();
+//                $em->persist($task);
+//                $em->flush();
+//            }
+//
+//        }
+
     }
 
     /**
