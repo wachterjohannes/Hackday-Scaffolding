@@ -46,5 +46,8 @@ class ScaffoldType extends AbstractType
                 $builder->add($def->getPropertyName());
             }
         }
+
+        // TODO Parameter (Add, Edit)
+        $builder->add('Save', 'submit');
     }
 }

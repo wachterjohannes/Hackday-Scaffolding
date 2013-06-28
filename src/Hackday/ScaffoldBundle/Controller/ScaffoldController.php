@@ -48,20 +48,22 @@ abstract class ScaffoldController extends Controller
         $data = $this->getEntityObject();
         $form = $this->createForm(new ScaffoldType($definitions, true), $data);
 
-        return array('definitions' => $definitions, 'data' => $data, 'form' => $form->createView(), 'routes' => $routes);
-//        if ($this->getRequest()->isMethod('POST')) {
-//
-//            $form->bind($this->getRequest());
-//
-//            if ($form->isValid()) {
-//
-//                $em = $this->getDoctrine()->getManager();
-//                $em->persist($task);
-//                $em->flush();
-//            }
-//
-//        }
+        if ($this->getRequest()->isMethod('POST')) {
 
+            $form->bind($this->getRequest());
+
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($data);
+                $em->flush();
+
+                // Redirect
+                return $this->redirect($this->generateUrl($routes->getIndexPath()));
+            }
+
+        }
+
+        return array('definitions' => $definitions, 'data' => $data, 'form' => $form->createView(), 'routes' => $routes);
     }
 
     /**
@@ -83,6 +85,26 @@ abstract class ScaffoldController extends Controller
      */
     public function editAction($id)
     {
+        $definitions = $this->getDefinitions();
+        $routes = $this->getRoutes();
+        $data = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
+        $form = $this->createForm(new ScaffoldType($definitions, false), $data);
+
+        if ($this->getRequest()->isMethod('POST')) {
+
+            $form->bind($this->getRequest());
+
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+
+                // Redirect
+                return $this->redirect($this->generateUrl($routes->getIndexPath()));
+            }
+
+        }
+
+        return array('definitions' => $definitions, 'data' => $data, 'form' => $form->createView(), 'routes' => $routes);
     }
 
     /**
